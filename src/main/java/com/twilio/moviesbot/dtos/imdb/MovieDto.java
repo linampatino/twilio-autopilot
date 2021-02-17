@@ -13,10 +13,10 @@ import lombok.Setter;
 @Setter
 public class MovieDto {
 
-	public String id;
-	public String runningTimeInMinutes;
-	public String title;
-	public String titleType;
-	public String year;
-	
+	private String id;
+	private String runningTimeInMinutes;
+	private String title;
+	private String titleType;
+	private String year;
+	private List<PrincipalDto> principals;
 }

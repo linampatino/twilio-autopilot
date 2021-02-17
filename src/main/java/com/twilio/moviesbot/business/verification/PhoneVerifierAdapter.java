@@ -1,4 +1,4 @@
-package com.twilio.moviesbot.services.verification;
+package com.twilio.moviesbot.business.verification;
 
 import org.springframework.stereotype.Component;
 
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 public interface PhoneVerifierAdapter {
 
 	public String sendVerificationToken(String phoneNumber, String channel);
+
 	public String checkVerificationToken(String phoneNumber, String code);
-	
+
 }

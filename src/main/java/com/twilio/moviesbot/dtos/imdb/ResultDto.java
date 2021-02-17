@@ -1,5 +1,6 @@
 package com.twilio.moviesbot.dtos.imdb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -13,5 +14,7 @@ import lombok.Setter;
 @Setter
 public class ResultDto {
 
-	private List<MovieDto> results;
+	private List<MovieDto> results = new ArrayList<>();
+	private List<String> types = new ArrayList<>();
+
 }

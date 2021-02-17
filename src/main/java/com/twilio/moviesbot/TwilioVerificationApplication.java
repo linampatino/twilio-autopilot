@@ -2,6 +2,9 @@ package com.twilio.moviesbot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class TwilioVerificationApplication {
@@ -10,4 +13,9 @@ public class TwilioVerificationApplication {
 		SpringApplication.run(TwilioVerificationApplication.class, args);
 	}
 
+	@Bean
+	public ObjectMapper objectMapper() {
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper;
+	}
 }

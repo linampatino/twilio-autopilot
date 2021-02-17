@@ -1,5 +1,7 @@
 package com.twilio.moviesbot.dtos;
 
+import com.twilio.moviesbot.dtos.autopilot.memory.MemoryDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +22,10 @@ public class AutopilotRequestDto {
 	public String channel;
 	public String currentTaskConfidence;
 	public String NextBestTask;
-		
+
 	public String callbackSource;
 	public String querySid;
-	
-	
+
+	public MemoryDto memoryDto;
+
 }

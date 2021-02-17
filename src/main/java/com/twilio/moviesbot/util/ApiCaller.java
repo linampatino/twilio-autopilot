@@ -4,56 +4,47 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.twilio.moviesbot.dtos.imdb.MovieDto;
-import com.twilio.moviesbot.dtos.imdb.ResultDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class ApiCaller {
 
-	
-	
-	public void call() throws IOException, InterruptedException {
-		
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create("https://imdb8.p.rapidapi.com/title/get-reviews?tconst=tt0944947&currentCountry=US&purchaseCountry=US"))
-				.header("x-rapidapi-key", "866cc1d4ccmsh30f3bf3786a9b90p125e49jsn13ae4dd98ab7")
-				.header("x-rapidapi-host", "imdb8.p.rapidapi.com")
-				.method("GET", HttpRequest.BodyPublishers.noBody())
-				.build();
-		
-		
-		
-		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		
-		
-		Gson gson = new Gson();
-		JsonElement element = gson.fromJson (response.body(), JsonElement.class);
-		ResultDto movieDto = gson.fromJson(element, ResultDto.class);
-		System.out.println(response.body());
-		
-	}
-	
-	public <T> T callGet(String url, Class<T> clazz, String... headers) throws IOException, InterruptedException {
-		
+	@Value("${imdb.x.rapidapi.key}")
+	private String RAPIDAPI_KEY;
+
+	@Value("${imdb.x.rapidapi.host}")
+	private String RAPIDAPI_HOST;
+
+	@Autowired
+	private ObjectMapper mapper;
+
+	private final String X_RAPIDAPI_KEY = "x-rapidapi-key";
+	private final String X_RAPIDAPI_HOST = "x-rapidapi-host";
+	private final String HTTPS = "https://%s%s";
+
+	public <T> T callGet(String uri, Class<T> clazz) throws IOException, InterruptedException {
+		String url = String.format(HTTPS, RAPIDAPI_HOST, uri);
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(url))
-				.headers(headers)
+				.header(X_RAPIDAPI_KEY, RAPIDAPI_KEY)
+				.header(X_RAPIDAPI_HOST, RAPIDAPI_HOST)
 				.GET()
 				.build();
-		
+
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		System.out.println(response.body());
-		
-		Gson gson = new Gson();
-		JsonElement element = gson.fromJson (response.body(), JsonElement.class);
-		return (T)gson.fromJson(element, clazz);	
-		
+
+		log.info("Imdb request : {}", url);
+		log.info("Imdb response : {}", response.body());
+
+		return (T) mapper.readValue(response.body(), clazz);
 	}
 }

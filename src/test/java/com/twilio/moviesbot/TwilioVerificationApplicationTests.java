@@ -1,4 +1,4 @@
-package com.twilio.verification;
+package com.twilio.moviesbot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

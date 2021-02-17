@@ -1,4 +1,4 @@
-package com.twilio.moviesbot.services.verification;
+package com.twilio.moviesbot.business.verification;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -8,12 +8,11 @@ import com.twilio.rest.verify.v2.service.Verification;
 import com.twilio.rest.verify.v2.service.VerificationCheck;
 
 @Component
-public class TwilioVerifierAdaptee implements PhoneVerifierAdapter{
+public class TwilioVerifierAdaptee implements PhoneVerifierAdapter {
 
-    
 	@Value("${twilio.service.id}")
 	public String SERVICE_SID;
-    
+
 	@Override
 	public String sendVerificationToken(String phoneNumber, String channel) {
 		Verification verification = Verification.creator(SERVICE_SID, phoneNumber, channel).create();
