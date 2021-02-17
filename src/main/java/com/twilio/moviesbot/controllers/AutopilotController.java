@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twilio.moviesbot.dtos.AutopilotRequestDto;
 import com.twilio.moviesbot.dtos.ValidateResponseDto;
 import com.twilio.moviesbot.dtos.autopilot.ActionDto;
@@ -23,6 +24,9 @@ public class AutopilotController {
 
 	@Autowired
 	AutopilotService autopilotService;
+	
+	@Autowired
+	private ObjectMapper mapper;
 
 	@PostMapping(path = "questions", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
 
@@ -30,12 +34,12 @@ public class AutopilotController {
 		ActionDto action = null;
 		try {
 
-			log.info("Request :: {}", request);
+			log.info("Request - questions :: {}", mapper.writeValueAsString(request));
 			action = autopilotService.getQuestions(request);
-			log.info("Response :: {} ", action);
+			log.info("Response - questions :: {} ", mapper.writeValueAsString(action));
 
 		} catch (Exception e) {
-			log.error("Error in validateCollect {}", e);
+			log.error("Error in questions {}", e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 
@@ -47,12 +51,12 @@ public class AutopilotController {
 		ValidateResponseDto action = null;
 		try {
 
-			log.info("Request :: {}", request);
+			log.info("Request - validateMovie :: {}", mapper.writeValueAsString(request));
 			action = autopilotService.validateMovie(request);
-			log.info("Response :: {} ", action);
+			log.info("Response - validateMovie :: {} ", mapper.writeValueAsString(action));
 
 		} catch (Exception e) {
-			log.error("Error in validateCollect {}", e);
+			log.error("Error in validateMovie {}", e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 
@@ -64,9 +68,9 @@ public class AutopilotController {
 		ActionSayDto action = null;
 		try {
 
-			log.info("Request :: {}", request);
+			log.info("Request - validateCollect :: {}", mapper.writeValueAsString(request));
 			action = autopilotService.validateQuestions(request);
-			log.info("Response :: {} ", action);
+			log.info("Response - validateCollect :: {} ", mapper.writeValueAsString(action));
 
 		} catch (Exception e) {
 			log.error("Error in validateCollect {}", e);

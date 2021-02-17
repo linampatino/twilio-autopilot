@@ -15,12 +15,15 @@ import lombok.Setter;
 @Setter
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MovieDto {
+public class PrincipalDto {
 
 	private String id;
-	private String runningTimeInMinutes;
-	private String title;
-	private String titleType;
-	private String year;
-	private List<PrincipalDto> principals;
+	private String name;
+	private String category;
+	private List<String> characters;
+	
+	public String toStringCharacters() {
+		return characters.stream().reduce(String::join).get();
+	}
+
 }

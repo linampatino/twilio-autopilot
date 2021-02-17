@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twilio.moviesbot.business.autopilot.CollectedDataParser;
+import com.twilio.moviesbot.business.autopilot.MovieValidator;
 import com.twilio.moviesbot.business.autopilot.QuestionGenerator;
 import com.twilio.moviesbot.dtos.AutopilotRequestDto;
 import com.twilio.moviesbot.dtos.ValidateResponseDto;
@@ -41,32 +42,26 @@ public class AutopilotService {
 
 	@Value("${imdb.x.rapidapi.find}")
 	private String FIND_MOVIE_URL;
-	
+
 	@Value("${autopilot.endpoint.validate.collect}")
 	private String VALIDATE_COLLECT_URL;
-	
+
 	@Autowired
-	private QueriedMovieRepository repository;
+	MovieValidator movieValidator;
 
 	@Autowired
 	private ApiCaller apiCaller;
 
-	@Autowired
-	private ObjectMapper mapper;
-	
 	@Autowired
 	private CollectedDataParser collectedDataParser;
 
 	public ValidateResponseDto validateMovie(AutopilotRequestDto request)
 			throws IOException, InterruptedException, MovieBotException {
 
-		MemoryDto memory = mapper.readValue(request.getMemory(), MemoryDto.class);
-		request.setMemoryDto(memory);
-
 		ValidateResponseDto valid = new ValidateResponseDto(true);
 		validateCurrentInput(request);
 
-		if (existMovieName(request)) {
+		if (movieValidator.existMovieName(request)) {
 			return valid;
 		}
 
@@ -78,33 +73,14 @@ public class AutopilotService {
 		}
 
 		MovieDto movieDto = movies.stream().findFirst().get();
-		saveQueriedMovie(request.getAssistantSid(), request.getDialogueSid(), movieDto.getTitle(),
-				getMovieId(movieDto.getId()), memory.getTwilio().getChat().getChannelSid());
+		movieValidator.saveQueriedMovie(request.getAssistantSid(), request.getDialogueSid(), movieDto.getTitle(),
+				getMovieId(movieDto.getId()), StringUtils.EMPTY);
 
 		return valid;
 	}
 
-	private boolean existMovieName(AutopilotRequestDto request) {
-		List<QueriedMovie> movies = repository.findByMovieName(request.getCurrentInput());
-		log.info("Query movies by : {}, result {}", request.getCurrentInput(), movies.size());
-
-		if (!movies.isEmpty()) {
-			extracted(request, movies.stream().findFirst().get());
-			return true;
-		}
-		return false;
-	}
-
 	private String getMovieId(String movieId) {
 		return movieId.substring(7, movieId.length() - 1);
-	}
-
-	private void extracted(AutopilotRequestDto request, QueriedMovie movie) {
-		String channelSid = request.getMemoryDto().getTwilio().getChat().getChannelSid();
-		if (!movie.getChannelSid().equals(channelSid)) {
-			saveQueriedMovie(request.getAssistantSid(), request.getDialogueSid(), movie.getMovieName(),
-					movie.getMovieId(), channelSid);
-		}
 	}
 
 	private void validateCurrentInput(AutopilotRequestDto request) throws MovieBotException {
@@ -121,20 +97,6 @@ public class AutopilotService {
 				.filter(movie -> movie.getTitleType() != null && movie.getTitleType().equals("movie"))
 				.collect(Collectors.toList());
 		return movies;
-	}
-
-	private void saveQueriedMovie(String assistantSid, String dialogueSid, String movieName, String movieId,
-			String channelSid) {
-		QueriedMovie newMovie = new QueriedMovie();
-
-		newMovie.setAssistantSid(assistantSid);
-		newMovie.setDialogueSid(dialogueSid);
-		newMovie.setMovieName(movieName);
-		newMovie.setMovieId(movieId);
-		newMovie.setChannelSid(channelSid);
-
-		log.info("Saving in DB :: {}", newMovie);
-		repository.save(newMovie);
 	}
 
 	public ActionDto getQuestions(AutopilotRequestDto request) throws IOException, InterruptedException {
@@ -168,7 +130,8 @@ public class AutopilotService {
 	public ActionSayDto validateQuestions(AutopilotRequestDto request)
 			throws JsonMappingException, JsonProcessingException {
 
-		List<AnswerDto> answers = collectedDataParser.parseAnswers(request.getMemory(), collectedDataParser.getCollectName(request.getMemory()));
+		List<AnswerDto> answers = collectedDataParser.parseAnswers(request.getMemory(),
+				collectedDataParser.getCollectName(request.getMemory()));
 		int correctAnswers = getNumberOfCorrectAnswers(answers);
 
 		String message = getResultMessage(answers.size(), correctAnswers);
@@ -181,13 +144,13 @@ public class AutopilotService {
 	}
 
 	private String getResultMessage(int answers, int correctAnswers) {
-		String message = "You have %d correct answers. %s";
+		String message = "";
 		if (correctAnswers == answers) {
 			message = "Congrats!!";
 		} else {
 			message = "Keep trying";
 		}
-		return message;
+		return String.format("You have %d correct answers. %s /n Say Hi to play again.", correctAnswers, message);
 	}
 
 	private int getNumberOfCorrectAnswers(List<AnswerDto> answers) {
@@ -195,5 +158,4 @@ public class AutopilotService {
 				.collect(Collectors.toList()).size();
 	}
 
-	
 }
