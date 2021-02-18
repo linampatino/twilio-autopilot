@@ -11,13 +11,13 @@
 #### 3.1 Technologies
 
 ##### * [Promagrmming lenguage]
-Java 11 and Spring Boot
+&nbsp;&nbsp;&nbsp;&nbsp; Java 11 and Spring Boot
 
 ##### * Database
-H2 - Memory database
+&nbsp;&nbsp;&nbsp;&nbsp; H2 - Memory database
 
 ##### * Deploy
-Maven and Heroku
+&nbsp;&nbsp;&nbsp;&nbsp; Maven and Heroku
 
 
 #### 3.2 Sequence diagram
