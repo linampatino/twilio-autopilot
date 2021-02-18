@@ -4,22 +4,26 @@
 
 ### 2. Restrictions
 
+
+
 ### 3. Design
 
 #### 3.1 Technologies
 
-##### 3.1.1 Promagrmming lenguage
+##### * Promagrmming lenguage
 Java 11 and Spring Boot
 
-##### 3.1.2 Database
+##### * Database
 H2 - Memory database
 
-##### 3.1.3 Deploy
+##### * Deploy
 Maven and Heroku
+
 
 #### 3.2 Sequence diagram
 
 ![Diagram](diagram.png)
+
 
 #### 3.3 Twilio task
 ```yaml
