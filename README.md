@@ -4,7 +4,8 @@
 
 This project is a Slack Channel Bot build using Twilio Autopilot.\
 \
-The idea behind MovieBot is to prove how much you know about your favorite movie. 
+The idea behind MovieBot is to prove how much you know about your favorite movie. \
+You need to add this workspace to your Slack [lmpp.slack.com](https://lmpp.slack.com/archives/C01N6GC08RX), and after add the channel #twilio-bot-poc
 
 ![Slack](slack.png)
 
