@@ -1,17 +1,28 @@
 # Twilio-Autopilot
 
 ### 1. Description 
+
 ### 2. Restrictions
 
 ### 3. Design
-This is an application developed using Java 11 and Spring Boot
 
-#### 3.1 Sequence diagram
+#### 3.1 Technologies
+
+##### 3.1.1 Promagrmming lenguage
+Java 11 and Spring Boot
+
+##### 3.1.2 Database
+H2 - Memory database
+
+##### 3.1.3 Deploy
+Maven and Heroku
+
+#### 3.2 Sequence diagram
 
 ![Diagram](diagram.png)
 
-#### 3.2 Twilio task
-```json
+#### 3.3 Twilio task
+```yaml
 {
    "actions": [
       {
