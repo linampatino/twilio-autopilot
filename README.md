@@ -26,6 +26,9 @@
 
 
 #### 3.3 Twilio task
+
+##### * First task: It is configured in the Twilio dashboard
+&nbsp;&nbsp;&nbsp;&nbsp; This is the first task that it's executed by the Bot
 ```yaml
 {
    "actions": [
@@ -68,6 +71,46 @@
                   "method": "POST",
                   "uri": "https://lmpp-movie-bot.herokuapp.com/v1/autopilot/questions"
                }
+            }
+         }
+      }
+   ]
+}
+```
+
+##### * Second task: It is generated dynamically in the code
+&nbsp;&nbsp;&nbsp;&nbsp; This is the second task that it's executed by the Bot. 
+&nbsp;&nbsp;&nbsp;&nbsp; The question are generated using the movie information obtained through the Imdb API.
+```yaml
+{
+   "actions":[
+      {
+         "collect":{
+            "name":"collect_tt0266543",
+            "questions":[
+               {
+                  "question":"What was the release year of Finding Nemo??",
+                  "name":"year_question_2003",
+                  "type":""
+               },
+               {
+                  "question":" What was the role played by the actor Albert Brooks??",
+                  "name":"role_question_Marlin",
+                  "type":""
+               },
+               {
+                  "question":"What was the actress who played the role of Dory??",
+                  "name":"actor_question_Ellen DeGeneres",
+                  "type":""
+               },
+               {
+                  "question":" What was the role played by the actor Alexander Gould??",
+                  "name":"role_question_Nemo",
+                  "type":""
+               }
+            ],
+            "on_complete":{
+               "redirect":"https://lmpp-movie-bot.herokuapp.com/v1/autopilot/validateCollect/"
             }
          }
       }
