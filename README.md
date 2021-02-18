@@ -5,12 +5,15 @@
 This project is a Slack Channel Bot build using Twilio Autopilot.\
 \
 The idea behind MovieBot is to prove how much you know about your favorite movie. \
-You need to add this workspace to your Slack [lmpp.slack.com](https://lmpp.slack.com/archives/C01N6GC08RX), and after add the channel #twilio-bot-poc
+You need to add this workspace ([lmpp.slack.com](https://lmpp.slack.com/archives/C01N6GC08RX)) to your Slack, and after add the channel #twilio-bot-poc
 
 ![Slack](slack.png)
 
-### 2. Restrictions
 
+### 2. Restrictions
+The Bot finds the movie by name consuming in the Imdb API. \
+This API returns all the occurrences that contains at least one of thhe words in the movie name. \
+For this reason, to facilitate the development, the Bot takes the first one as your favorite.  
 
 
 ### 3. Design
@@ -27,7 +30,7 @@ You need to add this workspace to your Slack [lmpp.slack.com](https://lmpp.slack
 &nbsp;&nbsp;&nbsp;&nbsp; Maven and Heroku
 
 ##### * Tools
-&nbsp;&nbsp;&nbsp;&nbsp; Twilio Autopilot and Slack
+&nbsp;&nbsp;&nbsp;&nbsp; Twilio Autopilot, Slack and Imdb API provided by APIDojo.net through RapiApi
 
 
 #### 3.2 Sequence diagram
