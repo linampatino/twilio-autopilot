@@ -6,6 +6,9 @@
 ### Design
 This is an application developed using Java 11 and Spring Boot
 
+#### Sequence diagram
+![Diagram](diagram.png)
+
 #### Twilio task
 
 
