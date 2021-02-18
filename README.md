@@ -2,6 +2,10 @@
 
 ### 1. Description 
 
+This project is a Slack Channel Bot build using Twilio Autopilot.\
+The idea behind MovieBot is to prove how much you know about your favorite movie. 
+
+
 ### 2. Restrictions
 
 
@@ -18,6 +22,9 @@
 
 ##### * Deploy
 &nbsp;&nbsp;&nbsp;&nbsp; Maven and Heroku
+
+##### * Tools
+&nbsp;&nbsp;&nbsp;&nbsp; Twilio Autopilot and Slack
 
 
 #### 3.2 Sequence diagram
@@ -79,7 +86,7 @@
 ```
 
 ##### * Second task: It is generated dynamically in the code
-&nbsp;&nbsp;&nbsp;&nbsp; This is the second task that it's executed by the Bot. 
+&nbsp;&nbsp;&nbsp;&nbsp; This is the second task that it's executed by the Bot.\ 
 &nbsp;&nbsp;&nbsp;&nbsp; The question are generated using the movie information obtained through the Imdb API.
 ```yaml
 {
