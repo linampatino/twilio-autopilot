@@ -1,4 +1,4 @@
-package com.twilio.moviesbot.dtos.autopilot.memory.collected;
+package com.twilio.moviesbot.dtos.autopilot;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AnswerDto {
+public class ValidateResponseDto {
 
-	private String answer;
-	private String question;
-	private String correctAnswer;
+	private boolean valid;
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.twilio.moviesbot.dtos.AutopilotRequestDto;
+import com.twilio.moviesbot.dtos.autopilot.AutopilotRequestDto;
 import com.twilio.moviesbot.models.QueriedMovie;
 import com.twilio.moviesbot.repositories.QueriedMovieRepository;
 

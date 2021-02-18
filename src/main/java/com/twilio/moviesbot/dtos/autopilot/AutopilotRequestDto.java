@@ -1,6 +1,4 @@
-package com.twilio.moviesbot.dtos;
-
-import com.twilio.moviesbot.dtos.autopilot.memory.MemoryDto;
+package com.twilio.moviesbot.dtos.autopilot;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +25,5 @@ public class AutopilotRequestDto {
 
 	public String callbackSource;
 	public String querySid;
-
-	public MemoryDto memoryDto;
 
 }

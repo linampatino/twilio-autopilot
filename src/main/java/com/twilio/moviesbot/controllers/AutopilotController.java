@@ -4,15 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.twilio.moviesbot.dtos.AutopilotRequestDto;
-import com.twilio.moviesbot.dtos.ValidateResponseDto;
 import com.twilio.moviesbot.dtos.autopilot.ActionDto;
 import com.twilio.moviesbot.dtos.autopilot.ActionSayDto;
+import com.twilio.moviesbot.dtos.autopilot.AutopilotRequestDto;
+import com.twilio.moviesbot.dtos.autopilot.ValidateResponseDto;
 import com.twilio.moviesbot.services.AutopilotService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,6 @@ public class AutopilotController {
 	private ObjectMapper mapper;
 
 	@PostMapping(path = "questions", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-
 	public ResponseEntity<ActionDto> getQuestions(AutopilotRequestDto request) {
 		ActionDto action = null;
 		try {
@@ -78,6 +78,11 @@ public class AutopilotController {
 		}
 
 		return ResponseEntity.ok(action);
+	}
+	
+	@GetMapping(path = "healthCheck")
+	public ResponseEntity<String> healthCheck(){
+		return ResponseEntity.ok("Hi I'm MovieBot");
 	}
 
 }

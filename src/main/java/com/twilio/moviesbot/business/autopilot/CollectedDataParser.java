@@ -13,7 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.twilio.moviesbot.dtos.autopilot.memory.collected.AnswerDto;
+import com.twilio.moviesbot.dtos.autopilot.AnswerDto;
 
 @Component
 public class CollectedDataParser {

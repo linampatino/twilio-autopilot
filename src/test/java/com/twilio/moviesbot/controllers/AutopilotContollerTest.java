@@ -18,10 +18,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.twilio.moviesbot.dtos.AutopilotRequestDto;
-import com.twilio.moviesbot.dtos.ValidateResponseDto;
 import com.twilio.moviesbot.dtos.autopilot.ActionDto;
 import com.twilio.moviesbot.dtos.autopilot.ActionSayDto;
+import com.twilio.moviesbot.dtos.autopilot.AutopilotRequestDto;
+import com.twilio.moviesbot.dtos.autopilot.ValidateResponseDto;
 import com.twilio.moviesbot.services.AutopilotService;
 
 @WebMvcTest(AutopilotController.class)

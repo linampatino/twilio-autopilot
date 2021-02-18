@@ -3,20 +3,25 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.twilio.verification</groupId>
-	<artifactId>twilio-verification</artifactId>
+	
+	<groupId>com.twilio.moviesbot</groupId>
+	<artifactId>twilio-moviesbot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>twilio-verification</name>
-	<description>Twilio Verification</description>
+	<name>twilio-moviesbot</name>
+	<description>LMPP - Movies Bot</description>
+	
 	<properties>
 		<java.version>11</java.version>
+		<full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
 	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -77,13 +82,11 @@
 		     <version>3.0.0</version>
 		 </dependency>
 			 
-
 	</dependencies>
-
-
 
 	<build>
 		<plugins>
+		
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -96,7 +99,26 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			
+			<!-- Heroku Maven Plugin Configuration -->
+	        <plugin>
+				<groupId>com.heroku.sdk</groupId>
+			    <artifactId>heroku-maven-plugin</artifactId>
+			    <version>3.0.4</version>
+			    <configuration>
+					<appName>lmpp-movie-bot</appName>
+					<includeTarget>false</includeTarget>
+					<includes>
+							<include>${basedir}/${full-artifact-name}</include>
+			        </includes>
+			        <jdkVersion>${java.version}</jdkVersion>
+			        <processTypes>
+							<web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
+			          </processTypes>
+			    </configuration>
+	        </plugin>
+			
 		</plugins>
 	</build>
-
+	
 </project>

@@ -6,16 +6,16 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.twilio.moviesbot.dtos.AutopilotRequestDto;
-import com.twilio.moviesbot.dtos.ValidateResponseDto;
 import com.twilio.moviesbot.dtos.autopilot.ActionCollectDto;
 import com.twilio.moviesbot.dtos.autopilot.ActionDto;
 import com.twilio.moviesbot.dtos.autopilot.ActionSayDto;
+import com.twilio.moviesbot.dtos.autopilot.AnswerDto;
+import com.twilio.moviesbot.dtos.autopilot.AutopilotRequestDto;
 import com.twilio.moviesbot.dtos.autopilot.CollectDto;
 import com.twilio.moviesbot.dtos.autopilot.QuestionDto;
 import com.twilio.moviesbot.dtos.autopilot.RedirectDto;
 import com.twilio.moviesbot.dtos.autopilot.SayDto;
-import com.twilio.moviesbot.dtos.autopilot.memory.collected.AnswerDto;
+import com.twilio.moviesbot.dtos.autopilot.ValidateResponseDto;
 import com.twilio.moviesbot.dtos.imdb.MovieDto;
 import com.twilio.moviesbot.dtos.imdb.PrincipalDto;
 import com.twilio.moviesbot.dtos.imdb.ResultDto;
