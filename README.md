@@ -10,7 +10,7 @@
 
 #### 3.1 Technologies
 
-##### * [Promagrmming lenguage]
+##### * Promagrmming lenguage
 &nbsp;&nbsp;&nbsp;&nbsp; Java 11 and Spring Boot
 
 ##### * Database
