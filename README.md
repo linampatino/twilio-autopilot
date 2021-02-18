@@ -38,7 +38,7 @@ For this reason, to facilitate the development, the Bot takes the first one as y
 
 #### 3.2 Sequence diagram
 
-![Diagram](diagram.png)\\
+![Diagram](diagram.png)\
 &nbsp;&nbsp;&nbsp;&nbsp; 1. In the future, the movie information could be saved in the database or in cache, in order to avoid 2 calls to the Imdb endpoint\
 &nbsp;&nbsp;&nbsp;&nbsp; 2. This step validate the title type returned by Imdb, only is valid the type : "movie". In case you enter a tv show name, the bot ask again for a vali movie.\
 &nbsp;&nbsp;&nbsp;&nbsp; 3. Generate the questions dynamically according to the movie information  and returns a collect task
